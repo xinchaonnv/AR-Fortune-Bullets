@@ -2,27 +2,27 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Fortune Bullet-Journey Recap</title>
+    <title>Journey Recap AR</title>
 
+    <!-- Mobile viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- 1) A-Frame -->
     <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+    <!-- 2) MindAR core -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image.prod.js"></script>
+    <!-- 3) MindAR A-Frame integration -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-aframe.prod.js"></script>
 
     <style>
       html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
+        margin: 0; padding: 0;
+        width: 100%; height: 100%;
         overflow: hidden;
       }
       video, canvas, a-scene {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 100%;
         object-fit: cover;
       }
     </style>
@@ -36,13 +36,20 @@
       embedded
       renderer="colorManagement: true;"
     >
+
+      <!-- Assets -->
       <a-assets>
         <a-asset-item id="orcModel" src="./orc.glb"></a-asset-item>
         <img id="journeyRecap" src="./journeyrecap.png">
       </a-assets>
+
+      <!-- Invisible camera for look-at logic -->
       <a-camera id="camera" position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- All content anchored to the tarot-card marker -->
       <a-entity mindar-image-target="targetIndex: 0">
 
+        <!-- 1) Journey Recap board -->
         <a-plane
           src="#journeyRecap"
           width="0.8"
@@ -51,25 +58,51 @@
           rotation="0 0 0">
         </a-plane>
 
-        <!-- 8b) stats overlay-->
+        <!-- 2) Dynamic stats text, aligned next to each printed label -->
         <a-entity position="0 0.8 -0.49">
-          <a-plane
-            width="0.7"
-            height="0.4"
-            color="#000"
-            opacity="0.6">
-          </a-plane>
-          <!-- custom game stats -->
+          <!-- Archetype -->
           <a-text
-            value="Archetype: Barbarian\nHP: 60/100\nTime: 4:20"
-            align="center"
+            value="Barbarian"
+            align="left"
             color="#FFF"
-            width="0.65"
-            position="0 0 0.01">
+            width="0.6"
+            position="-0.3  0.35  0">
+          </a-text>
+          <!-- Duration -->
+          <a-text
+            value="5m"
+            align="left"
+            color="#FFF"
+            width="0.6"
+            position="-0.3  0.20  0">
+          </a-text>
+          <!-- Path Chosen -->
+          <a-text
+            value="Goblin Town"
+            align="left"
+            color="#FFF"
+            width="0.6"
+            position="-0.3  0.05  0">
+          </a-text>
+          <!-- Final Health -->
+          <a-text
+            value="80 / 100"
+            align="left"
+            color="#FFF"
+            width="0.6"
+            position="-0.3 -0.10  0">
+          </a-text>
+          <!-- Boss Conquered -->
+          <a-text
+            value="Yes"
+            align="left"
+            color="#FFF"
+            width="0.6"
+            position="-0.3 -0.25  0">
           </a-text>
         </a-entity>
 
-        <!-- 8c) Orc model>
+        <!-- 3) Orc model, scaled & facing the user -->
         <a-gltf-model
           src="#orcModel"
           position="0 0 0"

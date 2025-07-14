@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Journey Recap</title>
-
-    <!-- 1) A‑Frame -->
+    <title>Fortune Bullet-Journey Recap</title>
     <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
-    <!-- 2) MindAR core (image tracking) -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image.prod.js"></script>
-    <!-- 3) MindAR A‑Frame integration -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  video, canvas, a-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
 
     <style>body { margin: 0; overflow: hidden; }</style>
   </head>
@@ -31,7 +46,6 @@
 
       <a-entity mindar-image-target="targetIndex: 0">
 
-        <!-- Corrected: use a-gltf-model -->
         <a-gltf-model
           src="#orcModel"
           position="0 0 0"
@@ -47,7 +61,7 @@
           rotation="0 0 0">
         </a-plane>
 
-        <!-- Floating Stats Panel -->
+        <!-- stats panel -->
         <a-entity position="0 1 0">
           <a-plane width="1.5" height="1" color="#333" opacity="0.7"></a-plane>
           <a-text

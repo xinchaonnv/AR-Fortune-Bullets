@@ -2,26 +2,42 @@
 <html>
   <head>
     <title>Journey Recap</title>
+
+    <!-- 1) A‑Frame -->
     <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+    <!-- 2) MindAR core (image tracking) -->
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image.prod.js"></script>
+    <!-- 3) MindAR A‑Frame integration -->
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+
     <style>body { margin: 0; overflow: hidden; }</style>
   </head>
+
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind; autoStart: true;" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: true" 
-             embedded
-             renderer="colorManagement: true;">
+    <a-scene
+      mindar-image="imageTargetSrc: ./targets.mind; autoStart: true;"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: true"
+      embedded
+      renderer="colorManagement: true;"
+    >
 
       <a-assets>
-        <a-asset-item id="charModel" src="./orc.glb"></a-asset-item>
+        <a-asset-item id="orcModel" src="./orc.glb"></a-asset-item>
         <img id="journeyRecap" src="./journeyrecap.png">
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-glb-model src="#orcModel" position="0 0 0" scale="0.15 0.15 0.15" rotation="0 180 0"></a-glb-model>
+
+        <!-- Corrected: use a-gltf-model -->
+        <a-gltf-model
+          src="#orcModel"
+          position="0 0 0"
+          scale="0.15 0.15 0.15"
+          rotation="0 180 0">
+        </a-gltf-model>
 
         <a-plane
           src="#journeyRecap"
@@ -34,9 +50,15 @@
         <!-- Floating Stats Panel -->
         <a-entity position="0 1 0">
           <a-plane width="1.5" height="1" color="#333" opacity="0.7"></a-plane>
-          <a-text value="Archetype: Barbarian\nHP: 60/100\nTime: 4:20" 
-                  align="center" color="#fff" position="0 0 0.01" width="1.2"></a-text>
+          <a-text
+            value="Archetype: Barbarian\nHP: 60/100\nTime: 4:20"
+            align="center"
+            color="#fff"
+            position="0 0 0.01"
+            width="1.2">
+          </a-text>
         </a-entity>
+
       </a-entity>
     </a-scene>
   </body>
